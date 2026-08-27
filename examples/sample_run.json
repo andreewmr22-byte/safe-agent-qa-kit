@@ -1,0 +1,39 @@
+{
+  "findings": [
+    {
+      "id": "BUG-001",
+      "severity": "high",
+      "summary": "Checkout total can become stale after quantity changes",
+      "reproduction": [
+        "Open the synthetic cart fixture",
+        "Change quantity from 1 to 2",
+        "Observe the total before refresh"
+      ],
+      "evidence": [
+        "Expected total: 40.00",
+        "Observed total: 20.00"
+      ]
+    }
+  ],
+  "fixes": [
+    {
+      "id": "FIX-001",
+      "finding_id": "BUG-001",
+      "change_summary": "Recompute the synthetic cart total after quantity mutation",
+      "tests": [
+        "quantity change updates total",
+        "initial cart total remains unchanged"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "fix_id": "FIX-001",
+      "verdict": "approved",
+      "notes": [
+        "Reproduction no longer fails",
+        "Regression test covers the original symptom"
+      ]
+    }
+  ]
+}
